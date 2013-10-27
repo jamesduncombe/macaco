@@ -20,7 +20,9 @@ describe Macaco::Messages do
       Macaco.configure do |config|
         config.api_key = ENV['MANDRILL_API_KEY']
       end
-      Macaco::Messages.send_message(data)
+      VCR.use_cassette('send_message') do
+        Macaco::Messages.send_message(data)
+      end
     end
     it { subject.must_be_kind_of Array }
     it { subject.first['status'].must_equal 'sent' }

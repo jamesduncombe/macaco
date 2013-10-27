@@ -18,3 +18,5 @@ tmp
 .env
 .ruby-version
 .ruby-gemset
+.travis.yml
+fixtures/vcr_cassettes/*
