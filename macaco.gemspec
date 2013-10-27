@@ -8,8 +8,8 @@ Gem::Specification.new do |gem|
   gem.version       = Macaco::VERSION
   gem.authors       = ["James Duncombe"]
   gem.email         = ["james@jamesduncombe.com"]
-  gem.description   = %q{A gem to handle Mandrill's API}
-  gem.summary       = %q{A gem to handle Mandrill's API}
+  gem.description   = %q{A tiny gem to handle Mandrill's API}
+  gem.summary       = %q{A tiny gem to handle Mandrill's API}
   gem.homepage      = ""
 
   gem.files         = `git ls-files`.split($/)
