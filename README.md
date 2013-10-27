@@ -1,4 +1,5 @@
 # Macaco
+[![Build Status](https://travis-ci.org/jamesduncombe/macaco.png?branch=master)](https://travis-ci.org/jamesduncombe/macaco)
 
 Tiny wrapper around [Mandrill's API](https://mandrillapp.com/api/docs/)
 
