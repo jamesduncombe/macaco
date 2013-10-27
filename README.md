@@ -1,6 +1,6 @@
 # Macaco
 
-TODO: Write a gem description
+Tiny wrapper around [Mandrill's API](https://mandrillapp.com/api/docs/)
 
 ## Installation
 
@@ -18,7 +18,41 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+You can configure Macaco to use an API by passing a block to the
+configure method. Here I've used an environment variable:
+
+```ruby
+Macaco.configure do |config|
+  config.api_key = ENV['MANDRILL_API_KEY']
+end
+```
+
+At the moment we just have the [send message](https://mandrillapp.com/api/docs/messages.JSON.html#method=send) method. Use it like this:
+
+Form your data hash:
+
+```ruby
+data = {
+  message: {
+    text: 'Boom boom',
+    html: '''
+      <h1>My email title</h1>
+      <p>My email body</p>
+      <small>Monkey Corp Ltd</small>
+    ''',
+    subject: 'Test subject',
+    from_email: 'james@jamesduncombe.com',
+    to: [{ email: 'james@jamesduncombe.com' }]
+  }
+}
+```
+
+Then call the method:
+
+```ruby
+Macaco::Messages.send_message(data)
+```
+
 
 ## Contributing
 
