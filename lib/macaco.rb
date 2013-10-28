@@ -3,7 +3,8 @@ require 'json'
 require 'open-uri'
 
 require 'macaco/version'
-require 'macaco/messages'
+require 'macaco/api'
+require 'macaco/resources/messages'
 
 module Macaco
   class << self
