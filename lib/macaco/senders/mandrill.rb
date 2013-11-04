@@ -1,5 +1,5 @@
 module Macaco
-  class Messages
+  class Mandrill
 
     def self.send(data)
       data.merge!({ key: Macaco.config.api_key })

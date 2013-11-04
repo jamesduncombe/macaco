@@ -5,6 +5,7 @@ require 'open-uri'
 require 'macaco/version'
 require 'macaco/api'
 require 'macaco/resources/messages'
+require 'macaco/models/message'
 
 module Macaco
   class << self
