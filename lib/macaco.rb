@@ -4,8 +4,8 @@ require 'open-uri'
 
 require 'macaco/version'
 require 'macaco/api'
-require 'macaco/resources/messages'
-require 'macaco/models/message'
+require 'macaco/senders/sender'
+require 'macaco/senders/mandrill'
 
 module Macaco
   class << self
@@ -18,12 +18,11 @@ module Macaco
   end
 
   class Configuration
-    attr_accessor :api_key, :api_root, :api_port
+    attr_accessor :api_key, :sender
 
     def initialize
-      @api_key = ENV['MANDRILL_API_KEY']
-      @api_root = 'mandrillapp.com'
-      @api_port = 443
+      @api_key  = ENV['MACACO_API_KEY']
+      @sender   = :mandrill
     end
   end
 end

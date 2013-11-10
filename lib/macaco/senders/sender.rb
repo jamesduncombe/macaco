@@ -1,5 +1,5 @@
 module Macaco
-  class Message
+  class Sender
 
     def initialize(*args, &block)
       @body_html = nil
@@ -27,7 +27,7 @@ module Macaco
       body_html args[:body_html]
       body_text args[:body_text]
     end
-    
+
     def to(val = nil)
       return @to unless val
       @to << { email: val }
@@ -55,22 +55,10 @@ module Macaco
     end
     alias_method :text, :body_text
 
-    # reflections
-
-    def to_mandrill_hash
-      {
-        message: {
-          from_email:  @from,
-          to:          @to,
-          subject:     @subject,
-          html:        @body_html,
-          text:        @body_text
-        }
-      }
-    end
+    # helpers - could be split out?
 
     def to_json
-      to_mandrill_hash.to_json
+      to_hash.to_json
     end
   end
 end
