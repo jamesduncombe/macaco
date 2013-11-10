@@ -8,9 +8,10 @@ Gem::Specification.new do |gem|
   gem.version       = Macaco::VERSION
   gem.authors       = ["James Duncombe"]
   gem.email         = ["james@jamesduncombe.com"]
-  gem.summary       = %q{A tiny gem to handle Mandrill's API}
-  gem.description   = %q{Tiny gem to handle Mandrill's API without other gem dependencies}
+  gem.summary       = %q{Tiny wrapper around Mandrill API's send method}
+  gem.description   = %q{Tiny gem to wrap Mandrill API's send method without other gem dependencies}
   gem.homepage      = "https://github.com/jamesduncombe/macaco"
+  gem.license       = 'MIT'
 
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }

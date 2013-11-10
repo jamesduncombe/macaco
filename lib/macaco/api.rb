@@ -6,22 +6,22 @@ module Macaco
       request = request_instance(args)
       request.body = args[:data].to_json
 
-      JSON.parse(http_response(request).body)
+      JSON.parse(http_response(request, args).body)
 
     end
 
     private
 
-      def self.http_response(request)
-        http_instance.start { |http| http.request(request) }
+      def self.http_response(request, args)
+        http_instance(args).start { |http| http.request(request) }
       end
 
       def self.request_instance(args)
         Net::HTTP::Post.new(args[:mail].api_path, initheader = { 'Content-Type' => 'application/json' })
       end
 
-      def self.http_instance
-        http = Net::HTTP.new(Macaco.config.api_root, Macaco.config.api_port)
+      def self.http_instance(args)
+        http = Net::HTTP.new(args[:mail].api_root, 443)
         http.use_ssl = true
         http
       end

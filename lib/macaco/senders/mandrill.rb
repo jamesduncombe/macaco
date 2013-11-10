@@ -1,6 +1,10 @@
 module Macaco
   class Mandrill < Sender
 
+    def api_key
+      Macaco.config.api_key || ENV['MACACO_API_KEY']
+    end
+
     def api_root
       'mandrillapp.com'
     end
@@ -22,8 +26,8 @@ module Macaco
     end
 
     def send
-      data = to_hash.merge!({ key: Macaco.config.api_key })
-      Macaco::Api.post({ mail: self, data: data})
+      data = to_hash.merge!({ key: api_key })
+      Macaco::Api.post({ mail: self, data: data })
     end
 
   end
