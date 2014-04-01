@@ -23,4 +23,6 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'vcr',     '~> 2.9.0'
   gem.add_development_dependency 'rake'
 
+  gem.add_runtime_dependency 'addressable'
+
 end

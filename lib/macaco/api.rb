@@ -4,7 +4,7 @@ module Macaco
     def self.post(args = {})
 
       request = request_instance(args)
-      request.body = args[:data].to_json
+      request.body = args[:data]
 
       JSON.parse(http_response(request, args).body)
 
@@ -17,7 +17,7 @@ module Macaco
       end
 
       def self.request_instance(args)
-        Net::HTTP::Post.new(args[:mail].api_path, { 'Content-Type' => 'application/json' })
+        Net::HTTP::Post.new(args[:mail].api_path, { 'Content-Type' => args[:mail].content_type })
       end
 
       def self.http_instance(args)

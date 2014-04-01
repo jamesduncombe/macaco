@@ -9,8 +9,8 @@ describe Macaco::Sendgrid do
 
   let(:mail) do
     Macaco::Sendgrid.new do
-      to      'to@test.com'
-      from    'from@test.com'
+      to      'james@jamesduncombe.com'
+      from    'james@jamesduncombe.com'
       subject 'Subject for my email'
       body_html '<h1>This is a header for the HTML version</h1>'
       body_text 'This is the Text version'
@@ -48,7 +48,7 @@ describe Macaco::Sendgrid do
         mail.send
       end
     end
-    it { subject.must_be_kind_of Array }
-    it { subject.first['status'].must_equal 'sent' }
+    it { subject.must_be_kind_of Hash }
+    it { subject['message'].must_equal 'success' }
   end
 end
