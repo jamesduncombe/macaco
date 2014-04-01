@@ -17,7 +17,7 @@ module Macaco
       end
 
       def self.request_instance(args)
-        Net::HTTP::Post.new(args[:mail].api_path, initheader = { 'Content-Type' => 'application/json' })
+        Net::HTTP::Post.new(args[:mail].api_path, { 'Content-Type' => 'application/json' })
       end
 
       def self.http_instance(args)

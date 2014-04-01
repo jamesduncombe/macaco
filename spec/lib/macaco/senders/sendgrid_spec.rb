@@ -1,15 +1,16 @@
 require 'spec_helper'
 
 Macaco.configure do |config|
-  config.api_key = ENV['MANDRILL_API_KEY']
+  config.api_key = ENV['SENDGRID_API_KEY']
+  config.api_user = ENV['SENDGRID_USER']
 end
 
-describe Macaco::Mandrill do
+describe Macaco::Sendgrid do
 
   let(:mail) do
-    Macaco::Mandrill.new do
-      to      'james@jamesduncombe.com'
-      from    'james@jamesduncombe.com'
+    Macaco::Sendgrid.new do
+      to      'to@test.com'
+      from    'from@test.com'
       subject 'Subject for my email'
       body_html '<h1>This is a header for the HTML version</h1>'
       body_text 'This is the Text version'
@@ -18,16 +19,16 @@ describe Macaco::Mandrill do
 
   describe '#docs' do
     it 'returns back the address for the documentation for the REAL API method' do
-      Macaco::Mandrill.new.docs.must_equal 'https://mandrillapp.com/api/docs/messages.JSON.html#method-send'
+      Macaco::Sendgrid.new.docs.must_equal 'http://sendgrid.com/docs/API_Reference/Web_API/mail.html'
     end
   end
 
   describe '#api_root' do
-    it { Macaco::Mandrill.new.api_root.must_equal 'mandrillapp.com' }
+    it { Macaco::Sendgrid.new.api_root.must_equal 'api.sendgrid.com' }
   end
 
   describe '#api_path' do
-    it { Macaco::Mandrill.new.api_path.must_equal '/api/1.0/messages/send.json' }
+    it { Macaco::Sendgrid.new.api_path.must_equal '/api/mail.send.json' }
   end
 
   describe '#to_hash' do
@@ -43,7 +44,7 @@ describe Macaco::Mandrill do
 
   describe '#send' do
     subject do
-      VCR.use_cassette('send_mandrill') do
+      VCR.use_cassette('send_sendgrid') do
         mail.send
       end
     end

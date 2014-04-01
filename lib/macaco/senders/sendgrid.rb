@@ -1,16 +1,16 @@
 module Macaco
-  class Mandrill < Sender
+  class Sendgrid < Sender
 
     def docs
-      'https://mandrillapp.com/api/docs/messages.JSON.html#method-send'
+      'http://sendgrid.com/docs/API_Reference/Web_API/mail.html'
     end
 
     def api_root
-      'mandrillapp.com'
+      'api.sendgrid.com'
     end
 
     def api_path
-      '/api/1.0/messages/send.json'
+      '/api/mail.send.json'
     end
 
     def to_hash
@@ -26,7 +26,7 @@ module Macaco
     end
 
     def send
-      data = to_hash.merge!({ key: api_key })
+      data = to_hash.merge!({ api_key: api_key, api_user: api_user })
       Macaco::Api.post({ mail: self, data: data })
     end
 
@@ -34,6 +34,10 @@ module Macaco
 
     def api_key
       Macaco.config.api_key || ENV['MACACO_API_KEY']
+    end
+
+    def api_user
+      Macaco.config.api_user || ENV['MACACO_USER']
     end
 
   end

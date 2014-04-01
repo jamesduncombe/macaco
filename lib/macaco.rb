@@ -6,6 +6,7 @@ require 'macaco/version'
 require 'macaco/api'
 require 'macaco/senders/sender'
 require 'macaco/senders/mandrill'
+require 'macaco/senders/sendgrid'
 
 module Macaco
   class << self
@@ -18,10 +19,9 @@ module Macaco
   end
 
   class Configuration
-    attr_accessor :api_key, :sender
+    attr_accessor :api_key, :api_user, :sender
 
     def initialize
-      @api_key  = ENV['MACACO_API_KEY']
       @sender   = :mandrill
     end
   end
