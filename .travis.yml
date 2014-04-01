@@ -6,7 +6,7 @@ rvm:
 - 2.0.0
 - 2.1.0
 - jruby-19mode
-- rbx-19mode
+- rbx
 env:
   global:
     secure: RRPan9WyIeNkwnDDHlmL+BgwSVP7dLcdUc7ZBQ4MF/XWH6dbkkTu5wDGxRnnI/Rjuwz1GKBpbV74La7X/3QrAQeQIUu5B/jdj2CgZvrTt2ngsbsPcLqLJXd6cCIUqBt125tkyPMDn3n/s1flloVvTLYRWZHwG0jOZiVy5rEdf9Q=
