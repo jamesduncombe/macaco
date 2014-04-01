@@ -1,11 +1,13 @@
 require 'spec_helper'
 
-Macaco.configure do |config|
-  config.api_key = ENV['SENDGRID_API_KEY']
-  config.api_user = ENV['SENDGRID_USER']
-end
-
 describe Macaco::Sendgrid do
+
+  before do
+    Macaco.configure do |config|
+      config.api_key  = ENV['SENDGRID_API_KEY']
+      config.api_user = ENV['SENDGRID_USER']
+    end
+  end
 
   let(:mail) do
     Macaco::Sendgrid.new do

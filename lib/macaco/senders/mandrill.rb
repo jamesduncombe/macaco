@@ -37,7 +37,7 @@ module Macaco
     private
 
     def convert_data_params(data)
-      data.to_hash
+      data.to_json
     end
 
     def api_key

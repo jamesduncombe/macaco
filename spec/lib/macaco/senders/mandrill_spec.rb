@@ -1,10 +1,12 @@
 require 'spec_helper'
 
-Macaco.configure do |config|
-  config.api_key = ENV['MANDRILL_API_KEY']
-end
-
 describe Macaco::Mandrill do
+
+  before do
+    Macaco.configure do |config|
+      config.api_key = ENV['MANDRILL_API_KEY']
+    end
+  end
 
   let(:mail) do
     Macaco::Mandrill.new do
