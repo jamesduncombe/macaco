@@ -9,6 +9,6 @@ rvm:
 - rbx
 env:
   global:
-    - secure: krDD3n+Fu7Ia3Wpm0/t1akFHNHmLVzk7efTa6AmGKmWkZltZTGNNPXnhIQAG+e4eYhgocT/Ia42Xx/7gMxRjKA4/N4FYhb8rGSj32h9NyXrdHFNjceUg7i8+G7BJvEtyda5PTDgrakDwsAIgCtvHw0Px2FjFV0J2wwKqEjx5k18=
-    - secure: roRUWUyrq/0cCZlY0owAyHNUfC3/DoVoHvBrzGeG1Kki6YRseLLLm97koAOio9g5qD95LrzWaaYHzwrYt6mqasdvp5S2MMA7759TU3sD4xphs0BUllBQV0E9xxRULvyEOQ+El2aPPy3IEScaPfW2z7wAt5gXx3qq+NvbRMQ4WXE=
-    - secure: IWbcpEya9zUD7ZmPUjTA8Ws9CqcJP0tsZEzpTDjYkrk5xNjDG0M+Z6CV/AKhh5GbsyT9IS1WWnABRj2x9qU3dO2JSY9OUCCYHLIbSfIlM97T4csD5PxZvQjT7k+JU10V9QHPiBnNW5XudUPNVCOhI9XWbpfJcPA8jqoTpdVpofA=
+    - secure: "bKfiz20c9hES95IOSzQmolmV5Rplhe11XS/puPsTeYANuL0jda6xlEP+r7/wtztFueQDIGJzVDrJPNkAaQms5qOwTVursdx5W4H9FanNTX7GBaAiaR6YmbcysBJTByPO48ustEUQR2mxsOA5JTYXdYb7nQd6hzJujGqzf+WTe58="
+    - secure: "C3a8krkzZK3tPlWNpduon0LCUAUaa2d3CA/aU15GV/yG/CH+fjjXeQhQNcQMN5Ahe8DFvVdZly5VZf5VnXh1k1mzebrqGurTgX6D483l+oc8ym6igiDnxtB5Q3VxjDjMsK1uLBltSXzOcdoGjyKm5AflqWNH5RXHY+7vAIWu9bs="
+    - secure: "dDpqHaTNH7Fway0b0WcVHCuaedMemAv3HMt92xD7wIHYkgue/Selx1MVA9e9f+/+x+2EkzyziktniKBGX77TgpCLBCq5x1CWOTQX0HSOt+hDOgJrLx2Yklo0LKoFGkjDw0tbH9nrMe6tA//bbn9FmUuKO3h5/nV7JZm1bmOQX84="
