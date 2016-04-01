@@ -1,7 +1,7 @@
 # Macaco
 [![Build Status](https://travis-ci.org/jamesduncombe/macaco.png?branch=master)](https://travis-ci.org/jamesduncombe/macaco)
 
-Tiny wrapper around (for now) [Mandrill API's send method](https://mandrillapp.com/api/docs/messages.JSON.html#method=send). Later to be expanded to handle Sendgrid's send method too.
+Tiny wrapper around [Sendgrid](https://sendgrid.com/docs/API_Reference/Web_API/mail.html#-send) and [Mandrill API's send methods](https://mandrillapp.com/api/docs/messages.JSON.html#method=send).
 
 ## Installation
 
@@ -19,24 +19,19 @@ Or install it yourself as:
 
 ## Usage
 
-By default Macaco tries to find your mail API key with the `MACACO_API_KEY`
-environment variable.
-
-However, you can configure Macaco to use a different key by passing a block to the
-configure method. Here I've used a different environment variable:
+You can configure Macaco to use your API key by passing a block to the
+configure method. Here I've used one for Sendgrid:
 
 ```ruby
 Macaco.configure do |config|
-  config.api_key = ENV['MANDRILL_API_KEY']
+  config.api_key = ENV['SENDGRID_API_KEY']
 end
 ```
-
-At the moment we just have the [send message](https://mandrillapp.com/api/docs/messages.JSON.html#method=send) method. Use it like this:
 
 First create a new mail object:
 
 ```ruby
-mail = Macaco::Mandrill.new do
+mail = Macaco::Sendgrid.new do
   to 'to@test.com'
   from 'from@test.com'
   subject 'This is my subject'
@@ -54,8 +49,7 @@ mail.send
 ## Todo
 
 - Add further reflection methods to be able to inspect the mail object
-- Add support for Sendgrid's send method
-
+- Add support for other API's send methods
 
 ## Contributing
 

@@ -19,10 +19,6 @@ module Macaco
   end
 
   class Configuration
-    attr_accessor :api_key, :api_user, :sender
-
-    def initialize
-      @sender = :mandrill
-    end
+    attr_accessor :api_key
   end
 end
