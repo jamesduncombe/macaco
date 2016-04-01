@@ -1,5 +1,5 @@
 # Macaco
-[![Build Status](https://travis-ci.org/jamesduncombe/macaco.png?branch=master)](https://travis-ci.org/jamesduncombe/macaco)
+[![Build Status](https://travis-ci.org/jamesduncombe/macaco.svg?branch=master)](https://travis-ci.org/jamesduncombe/macaco)
 
 Tiny wrapper around [Sendgrid](https://sendgrid.com/docs/API_Reference/Web_API/mail.html#-send) and [Mandrill API's send methods](https://mandrillapp.com/api/docs/messages.JSON.html#method=send).
 
