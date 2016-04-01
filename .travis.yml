@@ -9,6 +9,9 @@ rvm:
   - 2.3
   - jruby-19mode
 
+before_script:
+  - gem install bundler -v 1.11.2
+
 env:
   global:
   - secure: er1Lqs3NDljT6tTinixr2pHonlCP8G33dW1INaEQwoTFRR9BqRqsfci6LVF9yJH+vtrK1d6Pf+rmtq9Qf8M+PqHmDe5YPhF6qRsrVAcnQt27sYP6c+XPB0v3IY9Nokl8mR+CysLgv/mPwEUEdoMymgpdiTKcA+c3ZOUaoKVk+Is=
