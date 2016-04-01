@@ -30,7 +30,7 @@ module Macaco
 
     def to(val = nil)
       return @to unless val
-      @to << { email: val }
+      @to << val
     end
 
     def from(val = nil)

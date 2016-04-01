@@ -2,12 +2,10 @@ module Macaco
   class Api
 
     def self.post(args = {})
-
       request = request_instance(args)
       request.body = args[:data]
 
       JSON.parse(http_response(request, args).body)
-
     end
 
     private
@@ -17,7 +15,10 @@ module Macaco
       end
 
       def self.request_instance(args)
-        Net::HTTP::Post.new(args[:mail].api_path, { 'Content-Type' => args[:mail].content_type })
+        headers = {
+          'Content-Type' => args[:mail].content_type
+        }.merge(args.fetch(:headers) { Hash.new })
+        Net::HTTP::Post.new(args[:mail].api_path, headers)
       end
 
       def self.http_instance(args)

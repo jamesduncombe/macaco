@@ -22,7 +22,7 @@ module Macaco
     attr_accessor :api_key, :api_user, :sender
 
     def initialize
-      @sender   = :mandrill
+      @sender = :mandrill
     end
   end
 end

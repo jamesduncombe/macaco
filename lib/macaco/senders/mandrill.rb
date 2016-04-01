@@ -29,6 +29,11 @@ module Macaco
       }
     end
 
+    def to(val = nil)
+      return @to unless val
+      @to << { email: val }
+    end
+
     def send
       data = to_hash.merge!({ key: api_key })
       Macaco::Api.post({ mail: self, data: convert_data_params(data) })

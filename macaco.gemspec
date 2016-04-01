@@ -8,8 +8,8 @@ Gem::Specification.new do |gem|
   gem.version       = Macaco::VERSION
   gem.authors       = ["James Duncombe"]
   gem.email         = ["james@jamesduncombe.com"]
-  gem.summary       = %q{Tiny wrapper around Mandrill API's send method}
-  gem.description   = %q{Tiny gem to wrap Mandrill API's send method without other gem dependencies}
+  gem.summary       = %q{When all you want to do is send email}
+  gem.description   = %q{Tiny gem to send email using popular email providers}
   gem.homepage      = "https://github.com/jamesduncombe/macaco"
   gem.license       = 'MIT'
 
@@ -19,10 +19,8 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
 
   gem.add_development_dependency 'minitest', '~> 5.0'
-  gem.add_development_dependency 'webmock',  '~> 1.15'
-  gem.add_development_dependency 'vcr',      '~> 2.9'
+  gem.add_development_dependency 'webmock'
+  gem.add_development_dependency 'vcr',      '~> 3.0.1'
   gem.add_development_dependency 'rake',     '~> 10.1'
-
-  gem.add_runtime_dependency 'addressable',  '~> 2.3'
 
 end
