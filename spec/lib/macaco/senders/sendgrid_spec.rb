@@ -20,7 +20,7 @@ describe Macaco::Sendgrid do
 
   describe '#docs' do
     it 'returns back the address for the documentation for the REAL API method' do
-      Macaco::Sendgrid.new.docs.must_equal 'http://sendgrid.com/docs/API_Reference/Web_API/mail.html'
+      Macaco::Sendgrid.new.docs.must_equal 'https://sendgrid.com/docs/API_Reference/Web_API/mail.html#-send'
     end
   end
 

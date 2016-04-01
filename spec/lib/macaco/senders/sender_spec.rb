@@ -21,7 +21,7 @@ describe Macaco::Sender do
 
   describe '#to' do
     it 'sets the recipient if theres a string provided' do
-      mail.to.must_equal [ { email: 'to@test.com' } ]
+      mail.to.must_equal [ 'to@test.com' ]
     end
   end
 
@@ -52,5 +52,5 @@ describe Macaco::Sender do
       n.body_text.must_equal 'This is a test'
     end
   end
-  
+
 end

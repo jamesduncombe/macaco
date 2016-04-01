@@ -1,7 +1,5 @@
 language: ruby
-cache: bundler
 rvm:
-- 1.9.3
 - 2.1.0
 - 2.2.0
 - 2.3.0
@@ -9,6 +7,5 @@ rvm:
 - rbx-2.1.1
 env:
   global:
-  - secure: bKfiz20c9hES95IOSzQmolmV5Rplhe11XS/puPsTeYANuL0jda6xlEP+r7/wtztFueQDIGJzVDrJPNkAaQms5qOwTVursdx5W4H9FanNTX7GBaAiaR6YmbcysBJTByPO48ustEUQR2mxsOA5JTYXdYb7nQd6hzJujGqzf+WTe58=
-  - secure: C3a8krkzZK3tPlWNpduon0LCUAUaa2d3CA/aU15GV/yG/CH+fjjXeQhQNcQMN5Ahe8DFvVdZly5VZf5VnXh1k1mzebrqGurTgX6D483l+oc8ym6igiDnxtB5Q3VxjDjMsK1uLBltSXzOcdoGjyKm5AflqWNH5RXHY+7vAIWu9bs=
-  - secure: dDpqHaTNH7Fway0b0WcVHCuaedMemAv3HMt92xD7wIHYkgue/Selx1MVA9e9f+/+x+2EkzyziktniKBGX77TgpCLBCq5x1CWOTQX0HSOt+hDOgJrLx2Yklo0LKoFGkjDw0tbH9nrMe6tA//bbn9FmUuKO3h5/nV7JZm1bmOQX84=
+  - secure: er1Lqs3NDljT6tTinixr2pHonlCP8G33dW1INaEQwoTFRR9BqRqsfci6LVF9yJH+vtrK1d6Pf+rmtq9Qf8M+PqHmDe5YPhF6qRsrVAcnQt27sYP6c+XPB0v3IY9Nokl8mR+CysLgv/mPwEUEdoMymgpdiTKcA+c3ZOUaoKVk+Is=
+  - secure: pHFAESEdswQm3Ser9ex+gmdRTz0UBEj3+57lzi3lQyZu2cHoV3kEirZjwEdjJUzXcMxV00I2i87ULnO+IuDPvbMvmvncJtseMHQ2WeX17tvWTe5TiEFxLE4IqwzTiHbuFFqAAO6gi+rbNa3St09zAf/7FPDP9aY4+5JSqW8hK/s=
