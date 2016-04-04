@@ -8,6 +8,7 @@ module Macaco
       @to        = []
       @from      = nil
       @subject   = nil
+      @attachment = []
 
       if args.first.is_a? Hash
         hash_attributes(args.first)
@@ -26,6 +27,7 @@ module Macaco
       subject   args[:subject]
       body_html args[:body_html]
       body_text args[:body_text]
+      attachment args[:attachment]
     end
 
     def to(val = nil)
@@ -60,6 +62,11 @@ module Macaco
       @body_text ||= val
     end
     alias_method :text, :body_text
+
+    def attachment(val = nil)
+      return @attachment unless val
+      @attachment ||= val
+    end
 
     def headers
       {}

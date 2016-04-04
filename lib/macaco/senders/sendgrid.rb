@@ -61,6 +61,18 @@ module Macaco
       @toname += val
     end
 
+    def attachment(val = nil)
+      return @attachment if val.nil?
+      if val.is_a? Array
+        @attachment += val.map do |f|
+          file_handler(val)
+        end
+      else
+        @attachment << file_handler(val)
+      end
+    end
+    alias_method :attachments, :attachment
+
     def to_hash
       {
         from:     @from,
@@ -69,7 +81,8 @@ module Macaco
         toname:   @toname,
         subject:  @subject,
         html:     @body_html,
-        text:     @body_text
+        text:     @body_text,
+        attachment: @attachment
       }
     end
 
@@ -84,7 +97,15 @@ module Macaco
     private
 
     def convert_data_params(data)
-      URI.encode_www_form(data)
+      return URI.encode_www_form(data) if @attachment.nil?
+      data
+    end
+
+    def file_handler(f)
+      return f if f.respond_to? :read
+      File.open(File.expand_path(f), 'r')
+    rescue Errno::ENOENT
+      raise ArgumentError, "Macaco can't open file: #{f}"
     end
 
   end

@@ -19,7 +19,9 @@ describe Macaco::Sendgrid do
       subject   'Subject for my email'
       body_html '<h1>This is a header for the HTML version</h1>'
       body_text 'This is the Text version'
+      attachment './README.md'
     end
+
   end
 
   describe '.new' do
@@ -30,6 +32,19 @@ describe Macaco::Sendgrid do
   describe '#docs' do
     it 'returns back the address for the documentation for the REAL API method' do
       Macaco::Sendgrid.new.docs.must_equal 'https://sendgrid.com/docs/API_Reference/Web_API/mail.html#-send'
+    end
+  end
+
+  describe '#attachment' do
+    it 'handles invalid files' do
+      proc { mail.attachment('asdasd') }.must_raise ArgumentError
+    end
+    it 'handles multiple attachments' do
+      mail.attachment './Gemfile'
+      mail.attachment.map { |file| File.basename(file) }.must_equal %w(README.md Gemfile)
+    end
+    it 'handles plural of attachment' do
+      mail.attachments './Gemfile'
     end
   end
 
@@ -63,7 +78,7 @@ describe Macaco::Sendgrid do
   end
 
   describe '#to_json' do
-    it 'converts the mandrill hash into a JSON string' do
+    it 'converts the Sendgrid hash into a JSON string' do
       mail.to_json.must_be_kind_of String
     end
   end

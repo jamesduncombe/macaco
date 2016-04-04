@@ -1,25 +1,31 @@
+require './lib/macaco/multipart'
+
 module Macaco
   class Api
 
     def self.post(args = {})
-      request = request_instance(args)
-      request.body = args[:data]
+      # TODO: Remove this special case
+      if args[:mail].attachment.empty?
+        request = request_instance(args)
+        request.body = args[:data]
+      else
+        m = Macaco::Multipart.new(args[:mail])
+        args[:headers] = args[:headers].merge(m.headers)
+        request = request_instance(args)
+        request.body_stream = m
+      end
 
       JSON.parse(http_response(request, args).body)
     end
 
     private
 
-    def self.http_response(request, args)
-      http_instance(args).start { |http| http.request(request) }
+    def self.request_instance(args)
+      Net::HTTP::Post.new(args[:mail].api_path, args.fetch(:headers))
     end
 
-    def self.request_instance(args)
-      headers = args.fetch(:headers)
-
-      puts args[:mail].to_curl if Macaco.config.debug
-
-      Net::HTTP::Post.new(args[:mail].api_path, headers)
+    def self.http_response(request, args)
+      http_instance(args).start { |http| http.request(request) }
     end
 
     def self.http_instance(args)
