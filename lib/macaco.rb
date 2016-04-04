@@ -19,6 +19,6 @@ module Macaco
   end
 
   class Configuration
-    attr_accessor :api_key
+    attr_accessor :api_key, :debug
   end
 end

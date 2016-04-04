@@ -53,4 +53,10 @@ describe Macaco::Sender do
     end
   end
 
+  describe '#to_curl' do
+    it 'returns a runnable curl command' do
+      mail.to_curl.must_be_kind_of String
+    end
+  end
+
 end

@@ -10,22 +10,23 @@ module Macaco
 
     private
 
-      def self.http_response(request, args)
-        http_instance(args).start { |http| http.request(request) }
-      end
+    def self.http_response(request, args)
+      http_instance(args).start { |http| http.request(request) }
+    end
 
-      def self.request_instance(args)
-        headers = {
-          'Content-Type' => args[:mail].content_type
-        }.merge(args.fetch(:headers) { Hash.new })
-        Net::HTTP::Post.new(args[:mail].api_path, headers)
-      end
+    def self.request_instance(args)
+      headers = args.fetch(:headers)
 
-      def self.http_instance(args)
-        http = Net::HTTP.new(args[:mail].api_root, 443)
-        http.use_ssl = true
-        http
-      end
+      puts args[:mail].to_curl if Macaco.config.debug
+
+      Net::HTTP::Post.new(args[:mail].api_path, headers)
+    end
+
+    def self.http_instance(args)
+      http = Net::HTTP.new(args[:mail].api_root, 443)
+      http.use_ssl = true
+      http
+    end
 
   end
 end

@@ -17,36 +17,55 @@ module Macaco
       'application/json'
     end
 
+    def headers
+      {
+        "Content-Type" => content_type
+      }
+    end
+
     def to_hash
       {
         message: {
           from_email: @from,
-          to: @to,
-          subject: @subject,
-          html: @body_html,
-          text: @body_text
+          to:         @to,
+          subject:    @subject,
+          html:       @body_html,
+          text:       @body_text
         }
       }
     end
 
     def to(val = nil)
-      return @to unless val
-      @to << { email: val }
+      return @to if val.nil?
+      return to([val]) unless val.is_a? Array
+      @to += val.map do |eml|
+        if eml.is_a? Hash
+          {
+            email: fetch_email(eml),
+            name: eml.fetch(:name) { nil }
+          }
+        else
+          { email: eml }
+        end
+      end
     end
 
     def send
-      data = to_hash.merge!({ key: api_key })
-      Macaco::Api.post({ mail: self, data: convert_data_params(data) })
+      Macaco::Api.post({
+        mail: self,
+        data: convert_data_params(data),
+        headers: headers
+      })
     end
 
     private
 
-    def convert_data_params(data)
-      data.to_json
+    def data
+      to_hash.merge({ key: api_key })
     end
 
-    def api_key
-      Macaco.config.api_key || ENV['MACACO_API_KEY']
+    def convert_data_params(data)
+      data.to_json
     end
 
   end

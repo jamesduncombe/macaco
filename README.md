@@ -32,7 +32,7 @@ First create a new mail object:
 
 ```ruby
 mail = Macaco::Sendgrid.new do
-  to 'to@test.com'
+  to [{ email: 'to@test.com', name: 'Persons Name'}, 'person@email.com']
   from 'from@test.com'
   subject 'This is my subject'
   body_html '<h1>This is a title</h1>'
@@ -40,7 +40,7 @@ mail = Macaco::Sendgrid.new do
 end
 ```
 
-Then call the method:
+Then call the send method:
 
 ```ruby
 mail.send

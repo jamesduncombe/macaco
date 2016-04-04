@@ -2,6 +2,9 @@ require 'spec_helper'
 
 describe Macaco::Sendgrid do
 
+  # For test addresses
+  # SEE: https://support.sendgrid.com/hc/en-us/articles/203891358-Does-Sendgrid-offer-a-sandbox-or-test-environment-
+
   before do
     Macaco.configure do |config|
       config.api_key  = ENV['SENDGRID_API_KEY']
@@ -10,9 +13,10 @@ describe Macaco::Sendgrid do
 
   let(:mail) do
     Macaco::Sendgrid.new do
-      to      'james@jamesduncombe.com'
-      from    'james@jamesduncombe.com'
-      subject 'Subject for my email'
+      to        [{ email: 'test1@sink.sendgrid.net', name: 'to1' }, 'test2@sink.sendgrid.net']
+      to        [{ email: 'test3@sink.sendgrid.net', name: 'to2' }]
+      from({email: 'test@sink.sendgrid.net', name: 'Sink'})
+      subject   'Subject for my email'
       body_html '<h1>This is a header for the HTML version</h1>'
       body_text 'This is the Text version'
     end
@@ -22,6 +26,22 @@ describe Macaco::Sendgrid do
     it 'returns back the address for the documentation for the REAL API method' do
       Macaco::Sendgrid.new.docs.must_equal 'https://sendgrid.com/docs/API_Reference/Web_API/mail.html#-send'
     end
+  end
+
+  describe '#to' do
+    it 'needs to handle multiple recipients' do
+      mail.to.must_equal [ 'test1@sink.sendgrid.net', 'test2@sink.sendgrid.net', 'test3@sink.sendgrid.net' ]
+    end
+  end
+
+  describe '#toname' do
+    subject { mail.toname }
+    it { subject.count.must_equal 3 }
+  end
+
+  describe '#from' do
+    subject { mail.from }
+    it { subject.must_equal 'test@sink.sendgrid.net' }
   end
 
   describe '#api_root' do

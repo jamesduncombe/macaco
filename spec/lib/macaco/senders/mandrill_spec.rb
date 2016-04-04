@@ -10,8 +10,8 @@ describe Macaco::Mandrill do
 
   let(:mail) do
     Macaco::Mandrill.new do
-      to      'james@jamesduncombe.com'
-      from    'james@jamesduncombe.com'
+      to      [{ email: 'to@sink.sendgrid.net', name: 'Name'}, 't@sink.sendgrid.net']
+      from    'from@sink.sendgrid.net'
       subject 'Subject for my email'
       body_html '<h1>This is a header for the HTML version</h1>'
       body_text 'This is the Text version'
@@ -30,6 +30,20 @@ describe Macaco::Mandrill do
 
   describe '#api_path' do
     it { Macaco::Mandrill.new.api_path.must_equal '/api/1.0/messages/send.json' }
+  end
+
+  describe '#to' do
+    it 'needs to handle multiple recipients' do
+      m = Macaco::Mandrill.new do
+        to [ 'test1@sink.sendgrid.net', 'test2@sink.sendgrid.net' ]
+        to 'test3@sink.sendgrid.net'
+      end
+      m.to.must_equal([
+        { email: 'test1@sink.sendgrid.net' },
+        { email: 'test2@sink.sendgrid.net' },
+        { email: 'test3@sink.sendgrid.net' }
+      ])
+    end
   end
 
   describe '#to_hash' do
