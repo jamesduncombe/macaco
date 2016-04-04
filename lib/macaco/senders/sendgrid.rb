@@ -1,7 +1,7 @@
 module Macaco
   class Sendgrid < Sender
 
-    def initialize
+    def initialize(*)
       @toname = []
       @fromname = nil
       super

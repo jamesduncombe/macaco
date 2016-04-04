@@ -22,6 +22,11 @@ describe Macaco::Sendgrid do
     end
   end
 
+  describe '.new' do
+    subject { Macaco::Sendgrid.new({ to: { email: 'test1@sink.sendgrid.net'} }) }
+    it { subject.to.must_equal ['test1@sink.sendgrid.net'] }
+  end
+
   describe '#docs' do
     it 'returns back the address for the documentation for the REAL API method' do
       Macaco::Sendgrid.new.docs.must_equal 'https://sendgrid.com/docs/API_Reference/Web_API/mail.html#-send'
