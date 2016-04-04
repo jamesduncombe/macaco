@@ -48,6 +48,20 @@ Then call the send method:
 mail.send
 ```
 
+#### To and From names
+
+As you can see in the example above, you can either use a simple email address or provide a `name` attribute in order to pass this information along to the mailer service.
+
+
+#### Additional methods
+
+Each `Macaco::Sender` also has a `.to_curl` method. This allows you to get a runnable curl command from a particular `Macaco::Sender` instance. For example, running `.to_curl` on the above example gives:
+
+```ruby
+mail.to_curl
+# => "curl -X POST https://api.sendgrid.com/api/mail.send.json -H 'Content-Type: application/x-www-form-urlencoded' -H 'Authorization: Bearer YOUR_TOKEN' -d 'from=from%40test.com&fromname&to=to%40test.com&to=person%40email.com&toname=Persons+Name&toname=+&subject=This+is+my+subject&html=%3Ch1%3EThis+is+a+title%3C%2Fh1%3E&text=This+is+my+text+version'"
+```
+
 ## Todo
 
 - Add further reflection methods to be able to inspect the mail object
