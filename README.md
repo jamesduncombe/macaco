@@ -40,6 +40,8 @@ mail = Macaco::Sendgrid.new do
 end
 ```
 
+> In this case we're using Sendgrid - `Macaco::Sendgrid`. You can also use `Macaco::Mandrill` for Mandrill
+
 Then call the send method:
 
 ```ruby
