@@ -96,7 +96,7 @@ module Macaco
       res = `file --mime-type #{file.path}`
       res.split(' ').last
     rescue
-      raise 'Issue getting Mime type'
+      raise 'Macaco: Issue getting Mime type'
     end
 
   end

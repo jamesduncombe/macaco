@@ -85,12 +85,5 @@ module Macaco
       req
     end
 
-    def file_handler(f)
-      return f if f.respond_to? :read
-      File.open(File.expand_path(f), 'r')
-    rescue Errno::ENOENT
-      raise ArgumentError, "Macaco can't open file: #{f}"
-    end
-
   end
 end

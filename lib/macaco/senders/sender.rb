@@ -78,6 +78,13 @@ module Macaco
       val.fetch(:email) { raise KeyError, 'Please pass an email address (using key: :email)' }
     end
 
+    def file_handler(f)
+      return f if f.respond_to? :read
+      File.open(File.expand_path(f), 'r')
+    rescue Errno::ENOENT
+      raise ArgumentError, "Macaco: Can't open file: #{f}"
+    end
+
     def to_curl
       curl_headers = headers.each_with_object([]) do |(k,v), accm|
         accm << "-H '#{k}: #{v}'"
