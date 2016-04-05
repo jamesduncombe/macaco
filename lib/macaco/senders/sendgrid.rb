@@ -61,7 +61,7 @@ module Macaco
 
     def attachment(*val)
       return @attachment if val.flatten.compact.empty?
-      @attachment += val.flatten.map { |f| file_handler(f) }
+      @attachment += val.flat_map { |f| file_handler(f) }
     end
     alias_method :attachments, :attachment
 

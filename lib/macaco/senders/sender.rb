@@ -38,6 +38,8 @@ module Macaco
     end
 
     def to(*val)
+      return @to if val.flatten.compact.empty?
+      @to += val.flat_map { |t| t }
     end
 
     def from(val = nil)
@@ -85,6 +87,7 @@ module Macaco
       raise ArgumentError, "Macaco: Can't open file: #{f}"
     end
 
+    # TODO: Update to handle multipart...
     def to_curl
       curl_headers = headers.each_with_object([]) do |(k,v), accm|
         accm << "-H '#{k}: #{v}'"
