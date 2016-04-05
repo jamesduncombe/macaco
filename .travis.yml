@@ -1,18 +1,16 @@
 language: ruby
-
 cache: bundler
-
 rvm:
-  - 1.9.3
-  - 2.1
-  - 2.2
-  - 2.3.0
-  - jruby-19mode
-
+- 1.9.3
+- 2.1
+- 2.2
+- 2.3.0
+- jruby-19mode
 before_install:
-  - gem install bundler -v 1.11.2
-
+- gem install bundler -v 1.11.2
 env:
   global:
   - secure: er1Lqs3NDljT6tTinixr2pHonlCP8G33dW1INaEQwoTFRR9BqRqsfci6LVF9yJH+vtrK1d6Pf+rmtq9Qf8M+PqHmDe5YPhF6qRsrVAcnQt27sYP6c+XPB0v3IY9Nokl8mR+CysLgv/mPwEUEdoMymgpdiTKcA+c3ZOUaoKVk+Is=
   - secure: pHFAESEdswQm3Ser9ex+gmdRTz0UBEj3+57lzi3lQyZu2cHoV3kEirZjwEdjJUzXcMxV00I2i87ULnO+IuDPvbMvmvncJtseMHQ2WeX17tvWTe5TiEFxLE4IqwzTiHbuFFqAAO6gi+rbNa3St09zAf/7FPDP9aY4+5JSqW8hK/s=
+  - secure: sfFFLxonM2e7qbKLP18M7NOMMho13q/tiN6zewYC1mz4zyPd6L/mwNcq1e23Mbm8+yqfiznRMNh9DYVIIbTdXFBuSiedIzurdPnU8yx1j+gBgNtopmb9mbTkEoUcMYhgBme0vEjnf+ae9fiGg68+wADS+4Q0jVkCCX+elnlyJS0=
+  - secure: TSSvbtxDPwQ2tWfF2JKHccSH1k6Y6MSQ3c5E6WM/tadBBoX3saUwsHYvQJnczhzai4aokDreUoX6SjP4USKzgiRAlEoBLJ1fK5yKAT7Wh4DH5SxGHb9ZCLPXqUB3byBAuyHA9rH9LHfZNT1TQ+6oaUSiN2lzC2IFwmWWknfkoZU=
