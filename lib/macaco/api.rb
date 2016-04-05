@@ -1,5 +1,3 @@
-require './lib/macaco/multipart'
-
 module Macaco
   class Api
 
