@@ -30,6 +30,13 @@ module Macaco
       attachment args[:attachment]
     end
 
+    def send
+      Macaco::Api.post({
+        api_root: api_root,
+        request:  request
+      })
+    end
+
     def to(*val)
     end
 

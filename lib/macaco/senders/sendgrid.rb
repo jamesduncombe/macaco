@@ -78,13 +78,6 @@ module Macaco
       }
     end
 
-    def send
-      Macaco::Api.post({
-        api_root: api_root,
-        request: request
-      })
-    end
-
     private
 
     def request

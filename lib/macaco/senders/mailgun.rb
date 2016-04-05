@@ -38,7 +38,6 @@ module Macaco
         accm << if eml.is_a? Hash
                   email = fetch_email(eml)
                   email = "#{eml.fetch(:name)} <#{email}>" if eml.has_key? :name
-                  email
                 else
                   eml
                 end
@@ -74,13 +73,6 @@ module Macaco
         text:     @body_text,
         attachment: @attachment
       }
-    end
-
-    def send
-      Macaco::Api.post({
-        api_root: api_root,
-        request: request
-      })
     end
 
     private

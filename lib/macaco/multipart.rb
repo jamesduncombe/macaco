@@ -1,6 +1,5 @@
 require 'stringio'
 require 'net/http'
-require 'base64'
 
 # Heavily influenced from...
 # SEE: https://github.com/rest-client/rest-client/blob/master/lib/restclient/payload.rb
@@ -60,11 +59,11 @@ module Macaco
     end
 
     def build_file(stream, k, v)
-      stream << "Content-Disposition: form-data; name=\"files[#{File.basename(v)}]\"; filename=\"#{File.basename(v)}\"#{EOL}"
-      stream << "Content-Type: #{mime_type(v)}#{EOL}"
-      stream << EOL
-      stream << EOL
-      stream << "#{v.read}"
+      stream.write("Content-Disposition: form-data; name=\"files[#{File.basename(v)}]\"; filename=\"#{File.basename(v)}\"#{EOL}")
+      stream.write("Content-Type: #{mime_type(v)}#{EOL}")
+      stream.write(EOL)
+      stream.write(EOL)
+      stream.write("#{v.read}")
       stream
     ensure
       v.close
