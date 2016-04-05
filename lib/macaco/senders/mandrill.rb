@@ -52,9 +52,8 @@ module Macaco
 
     def send
       Macaco::Api.post({
-        mail: self,
-        data: convert_data_params(data),
-        headers: headers
+        api_root: api_root,
+        request: request
       })
     end
 
@@ -64,8 +63,10 @@ module Macaco
       to_hash.merge({ key: api_key })
     end
 
-    def convert_data_params(data)
-      data.to_json
+    def request
+      req = Net::HTTP::Post.new(api_path, headers)
+      req.body = data.to_json
+      req
     end
 
   end

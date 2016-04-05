@@ -78,13 +78,20 @@ module Macaco
 
     def send
       Macaco::Api.post({
-        mail: self,
-        data: data,
-        headers: headers
+        api_root: api_root,
+        request: request
       })
     end
 
     private
+
+    def request
+      multipart = Macaco::Multipart.new(self)
+      new_headers = headers.merge(multipart.headers)
+      req = Net::HTTP::Post.new(api_path, new_headers)
+      req.body_stream = multipart
+      req
+    end
 
     def file_handler(f)
       return f if f.respond_to? :read
