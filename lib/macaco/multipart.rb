@@ -23,16 +23,19 @@ module Macaco
       @stream.binmode
       @stream.write(b + EOL)
 
-      last_index = mail.to_hash.count - 1
-      mail.to_hash.each_with_index do |(k,v), index|
-        if v.is_a?(Array)
-          v.each do |ov|
-            @stream.write(EOL + b + EOL)
-            build_part(@stream, k, ov)
-          end
+      m = mail.to_hash
+
+      fields = m.each_with_object([]) do |(k,v), accm|
+        if v.is_a? Array
+          v.map { |a| [k,a] }.map { |s| accm << s }
         else
-          build_part(@stream, k, v)
+          accm << [k,v]
         end
+      end
+
+      last_index = fields.count - 1
+      fields.each_with_index do |(k,v),index|
+        build_part(@stream, k, v)
         @stream.write(EOL + b)
         @stream.write(EOL) unless last_index == index
       end
@@ -62,8 +65,9 @@ module Macaco
       stream << EOL
       stream << EOL
       stream << "#{v.read}"
-      v.close
       stream
+    ensure
+      v.close
     end
 
     def close
@@ -85,7 +89,7 @@ module Macaco
     private
 
     def boundary
-      @boundary ||= rand(1_000_000)
+      @boundary ||= "---------------------#{rand(1_000_000)}"
     end
 
     def mime_type(file)

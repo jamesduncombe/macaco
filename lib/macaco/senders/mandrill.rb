@@ -35,10 +35,10 @@ module Macaco
       }
     end
 
-    def to(val = nil)
-      return @to if val.nil?
-      return to([val]) unless val.is_a? Array
-      @to += val.map do |eml|
+    def to(*val)
+      return @to if val.flatten.compact.empty?
+
+      @to += val.flatten.map do |eml|
         if eml.is_a? Hash
           {
             email: fetch_email(eml),

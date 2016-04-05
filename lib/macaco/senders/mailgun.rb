@@ -1,32 +1,33 @@
+require 'base64'
+
 module Macaco
-  class Sendgrid < Sender
+  class Mailgun < Sender
 
     def initialize(*)
-      @toname = []
-      @fromname = nil
+      @mailgun_domain = nil
       super
     end
 
     def docs
-      'https://sendgrid.com/docs/API_Reference/Web_API/mail.html#-send'
+      'https://documentation.mailgun.com/api-sending.html#sending'
     end
 
     def api_root
-      'api.sendgrid.com'
+      'api.mailgun.net'
     end
 
     def api_path
-      '/api/mail.send.json'
+      "/v3/#{mailgun_domain}/messages"
     end
 
     def content_type
-      'application/x-www-form-urlencoded'
+      'multipart/form-data'
     end
 
     def headers
       {
         "Content-Type" => content_type,
-        "Authorization" => "Bearer #{api_key}"
+        "Authorization" => "Basic #{Base64.encode64('api:'+api_key).strip}"
       }
     end
 
@@ -34,13 +35,13 @@ module Macaco
       return @to if val.flatten.compact.empty?
 
       @to += val.flatten.each_with_object([]) do |eml, accm|
-        if eml.is_a? Hash
-          accm << fetch_email(eml)
-          toname(eml.fetch(:name) { ' ' })
-        else
-          accm << eml
-          toname(' ')
-        end
+        accm << if eml.is_a? Hash
+                  email = fetch_email(eml)
+                  email = "#{eml.fetch(:name)} <#{email}>" if eml.has_key? :name
+                  email
+                else
+                  eml
+                end
       end
     end
 
@@ -48,15 +49,9 @@ module Macaco
       return @from if val.nil?
       if val.is_a? Hash
         @from = fetch_email(val)
-        @fromname = val.fetch(:name) { ' ' }
       else
         @from = val
       end
-    end
-
-    def toname(*val)
-      return @toname if val.empty?
-      @toname += val.flatten
     end
 
     def attachment(*val)
@@ -65,33 +60,31 @@ module Macaco
     end
     alias_method :attachments, :attachment
 
+    def mailgun_domain(val = nil)
+      return @mailgun_domain if val.nil?
+      @mailgun_domain = val
+    end
+
     def to_hash
       {
         from:     @from,
-        fromname: @fromname,
         to:       @to,
-        toname:   @toname,
         subject:  @subject,
         html:     @body_html,
         text:     @body_text,
-        file:     @attachment
+        attachment: @attachment
       }
     end
 
     def send
       Macaco::Api.post({
         mail: self,
-        data: convert_data_params(data),
+        data: data,
         headers: headers
       })
     end
 
     private
-
-    def convert_data_params(data)
-      return URI.encode_www_form(data) if @attachment.nil?
-      data
-    end
 
     def file_handler(f)
       return f if f.respond_to? :read

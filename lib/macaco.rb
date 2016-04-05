@@ -7,6 +7,7 @@ require 'macaco/api'
 require 'macaco/senders/sender'
 require 'macaco/senders/mandrill'
 require 'macaco/senders/sendgrid'
+require 'macaco/senders/mailgun'
 
 module Macaco
   class << self

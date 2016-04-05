@@ -5,7 +5,7 @@ module Macaco
 
     def self.post(args = {})
       # TODO: Remove this special case
-      if args[:mail].attachment.empty?
+      if args[:mail].attachment.empty? && !args[:mail].content_type == 'multipart/form-data'
         request = request_instance(args)
         request.body = args[:data]
       else
@@ -15,7 +15,8 @@ module Macaco
         request.body_stream = m
       end
 
-      JSON.parse(http_response(request, args).body)
+      resp = http_response(request, args)
+      JSON.parse(resp.body)
     end
 
     private

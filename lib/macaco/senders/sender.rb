@@ -30,15 +30,7 @@ module Macaco
       attachment args[:attachment]
     end
 
-    def to(val = nil)
-      case
-      when val.nil?
-        @to
-      when val.is_a?(Array)
-        @to += val
-      else
-        @to << val
-      end
+    def to(*val)
     end
 
     def from(val = nil)
@@ -63,9 +55,7 @@ module Macaco
     end
     alias_method :text, :body_text
 
-    def attachment(val = nil)
-      return @attachment unless val
-      @attachment ||= val
+    def attachment(*val)
     end
 
     def headers
