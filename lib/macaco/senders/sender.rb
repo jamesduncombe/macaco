@@ -68,7 +68,9 @@ module Macaco
     end
 
     def headers
-      {}
+      {
+        "Content-Type" => "application/x-www-form-urlencoded"
+      }
     end
 
     def convert_data_params(_)
