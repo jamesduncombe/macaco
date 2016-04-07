@@ -87,12 +87,14 @@ module Macaco
       raise ArgumentError, "Macaco: Can't open file: #{f}"
     end
 
-    # TODO: Update to handle multipart...
     def to_curl
-      curl_headers = headers.each_with_object([]) do |(k,v), accm|
-        accm << "-H '#{k}: #{v}'"
-      end.join ' '
-      "curl -X POST https://#{api_root}#{api_path} #{curl_headers} -d '#{convert_data_params(data)}'"
+      Macaco::Curlable.new(
+        headers: headers,
+        api_root: api_root,
+        api_path: api_path,
+        data: data,
+        content_type: content_type
+      ).to_curl
     end
 
     def to_json
@@ -109,6 +111,7 @@ module Macaco
 
     def api_path; end
     def api_root; end
+    def content_type; end
 
     def api_key
       return Macaco.config.api_key unless Macaco.config.api_key.nil?

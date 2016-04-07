@@ -82,7 +82,10 @@ module Macaco
     end
 
     def headers
-      { "Content-Type" => "multipart/form-data; boundary=#{boundary}" }
+      {
+        "Content-Type" => "multipart/form-data; boundary=#{boundary}",
+        "Content-Length" => size.to_s
+      }
     end
 
     private

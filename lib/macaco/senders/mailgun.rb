@@ -72,7 +72,7 @@ module Macaco
         html:     @body_html,
         text:     @body_text,
         attachment: @attachment
-      }
+      }.reject { |_,v| v.nil? || v.empty? }
     end
 
     private

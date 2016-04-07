@@ -21,7 +21,15 @@ describe Macaco::Sendgrid do
       body_text 'This is the Text version'
       attachment './README.md'
     end
+  end
 
+  let(:mail_with_no_attachments) do
+    Macaco::Sendgrid.new do
+      to      'test@sink.sendgrid.net'
+      from    'test@sink.sendgrid.net'
+      subject 'test'
+      text    'test'
+    end
   end
 
   describe '.new' do
@@ -80,6 +88,21 @@ describe Macaco::Sendgrid do
   describe '#to_json' do
     it 'converts the Sendgrid hash into a JSON string' do
       mail.to_json.must_be_kind_of String
+    end
+  end
+
+  describe '#to_curl' do
+    it 'converts the Sendgrid request into a cURL request' do
+      mail.to_curl.must_be_kind_of String
+    end
+  end
+
+  describe '#content_type' do
+    it 'with attachments sets content_type to multipart/form-data' do
+      mail.content_type.must_equal 'multipart/form-data'
+    end
+    it 'application/x-www-form-urlencoded as content_type if there are no attachments' do
+      mail_with_no_attachments.content_type.must_equal 'application/x-www-form-urlencoded'
     end
   end
 

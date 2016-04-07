@@ -4,6 +4,7 @@ require 'open-uri'
 
 require 'macaco/version'
 require 'macaco/multipart'
+require 'macaco/curlable'
 require 'macaco/api'
 require 'macaco/senders/sender'
 require 'macaco/senders/mandrill'

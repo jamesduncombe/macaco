@@ -20,6 +20,7 @@ module Macaco
     end
 
     def content_type
+      return 'multipart/form-data' if attachments.any?
       'application/x-www-form-urlencoded'
     end
 
@@ -75,16 +76,27 @@ module Macaco
         html:     @body_html,
         text:     @body_text,
         file:     @attachment
-      }
+      }.reject { |_,v| v.nil? || v.empty? }
     end
 
     private
 
     def request
+      return request_multipart if attachments.any?
+      request_urlencoded
+    end
+
+    def request_multipart
       multipart = Macaco::Multipart.new(self)
       new_headers = headers.merge(multipart.headers)
       req = Net::HTTP::Post.new(api_path, new_headers)
       req.body_stream = multipart
+      req
+    end
+
+    def request_urlencoded
+      req = Net::HTTP::Post.new(api_path, headers)
+      req.body = URI.encode_www_form(data.to_hash)
       req
     end
 
