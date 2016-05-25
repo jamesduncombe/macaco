@@ -60,10 +60,11 @@ module Macaco
 
     def build_file(stream, k, v)
       stream.write("Content-Disposition: form-data; name=\"files[#{File.basename(v)}]\"; filename=\"#{File.basename(v)}\"#{EOL}")
+      stream.write("Content-Transfer-Encoding: base64#{EOL}")
       stream.write("Content-Type: #{mime_type(v)}#{EOL}")
       stream.write(EOL)
       stream.write(EOL)
-      stream.write("#{v.read}")
+      stream.write("#{Base64.encode64(v.read)}")
       stream
     ensure
       v.close
